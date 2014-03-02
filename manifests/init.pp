@@ -1,6 +1,6 @@
 # Class: php
 #
-# Install PHP common files, dev files, and PEAR/PECL tools.
+# Install PHP common files and dev files.
 #
 # == Parameters:
 #
