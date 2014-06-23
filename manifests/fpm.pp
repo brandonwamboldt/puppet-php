@@ -102,15 +102,15 @@ class php::fpm (
     fail('You may not supply both ini_content and ini_source parameters to php::fpm')
   }
 
-  package { $package_fpm:
+  package { $::php::params::package_fpm:
     ensure => $ensure,
   }
 
   if $ensure == 'present' {
-    service { $fpm_service:
+    service { $::php::params::fpm_service:
       ensure  => $start,
       enable  => $enable,
-      require => [Package[$package_fpm], File[$log_directory]],
+      require => [Package[$::php::params::package_fpm], File[$log_directory]],
     }
 
     file { $log_directory:
@@ -118,7 +118,7 @@ class php::fpm (
       owner   => $log_owner,
       group   => $log_group,
       mode    => '0775',
-      require => Package[$package_fpm],
+      require => Package[$::php::params::package_fpm],
     }
 
     file { "${fpm_conf_dir}/php-fpm.conf":
@@ -127,8 +127,8 @@ class php::fpm (
       owner   => 'root',
       group   => 'root',
       mode    => '0644',
-      notify  => Service[$fpm_service],
-      require => Package[$package_fpm],
+      notify  => Service[$::php::params::fpm_service],
+      require => Package[$::php::params::package_fpm],
     }
 
     file { $real_fpm_pool_dir:
@@ -138,16 +138,16 @@ class php::fpm (
       recurse => true,
       purge   => true,
       force   => true,
-      notify  => Service[$fpm_service],
-      require => Package[$package_fpm],
+      notify  => Service[$::php::params::fpm_service],
+      require => Package[$::php::params::package_fpm],
     }
 
     file { $real_fpm_confd_dir:
       ensure  => directory,
       owner   => 'root',
       group   => 'root',
-      notify  => Service[$fpm_service],
-      require => Package[$package_fpm],
+      notify  => Service[$::php::params::fpm_service],
+      require => Package[$::php::params::package_fpm],
     }
 
     if $ini_source or $ini_content {
@@ -158,8 +158,8 @@ class php::fpm (
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        notify  => Service[$fpm_service],
-        require => Package[$package_fpm],
+        notify  => Service[$::php::params::fpm_service],
+        require => Package[$::php::params::package_fpm],
       }
     }
   }

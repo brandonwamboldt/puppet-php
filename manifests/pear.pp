@@ -14,7 +14,7 @@
 class php::pear ($ensure = 'present') {
   include php::params
 
-  package { $package_pear:
+  package { $::php::params::package_pear:
     ensure => $ensure,
   }
 }

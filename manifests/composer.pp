@@ -21,7 +21,7 @@ class php::composer ($ensure = 'present', $install_path = '/usr/bin/composer') {
     exec { 'php_composer_install':
       command => "curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin && mv /usr/bin/composer.phar ${install_path}",
       creates => $install_path,
-      path    => $exec_path,
+      path    => $::php::params::exec_path,
     }
   } else {
     file { $install_path:

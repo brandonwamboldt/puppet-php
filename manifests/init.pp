@@ -14,11 +14,11 @@
 class php ($ensure = 'present') {
   include php::params
 
-  package { $common_package_name:
+  package { $::php::params::common_package_name:
     ensure  => $ensure,
   }
 
-  package { $package_dev:
+  package { $::php::params::package_dev:
     ensure  => $ensure,
     require => Package[$common_package_name],
   }

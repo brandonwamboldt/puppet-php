@@ -27,7 +27,7 @@ class php::cli (
     fail('You may not supply both ini_content and ini_source parameters to php::fpm')
   }
 
-  package { 'php5-cli':
+  package { $::php::params::package_cli:
     ensure => $ensure,
   }
 

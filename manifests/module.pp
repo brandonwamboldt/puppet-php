@@ -11,7 +11,7 @@
 define php::module ($ensure = 'present', $prefix = false) {
   include php::params
 
-  if defined(Class[$package_fpm]) {
+  if defined(Class[$::php::params::package_fpm]) {
     $to_notify = Class['php::fpm']
   } else {
     $to_notify = undef

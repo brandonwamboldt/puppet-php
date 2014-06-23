@@ -5,7 +5,7 @@ class php::params {
 
   case $::osfamily {
     'Debian': {
-      $package_common = 'php5-common'
+      $common_package_name = 'php5-common'
       $package_cli    = 'php5-cli'
       $package_dev    = 'php5-dev'
       $package_fpm    = 'php5-fpm'
@@ -22,7 +22,7 @@ class php::params {
       $httpd_conf_dir = '/etc/apache2/conf.d'
     }
     default: {
-      $package_common = 'php-common'
+      $common_package_name = 'php-common'
       $package_cli    = 'php-cli'
       $package_dev    = 'php-dev'
       $package_fpm    = 'php-fpm'
